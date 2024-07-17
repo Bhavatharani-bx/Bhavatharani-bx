@@ -1,0 +1,27 @@
+import random
+import string
+
+class PasswordGenerator:
+    def __init__(self, length):
+        self.length = length
+        self.characters = string.ascii_letters + string.digits + string.punctuation
+
+    def validate_length(self):
+        if self.length < 1:
+            raise ValueError("Password length must be at least 1")
+
+    def generate(self):
+        self.validate_length()
+        return ''.join(random.choice(self.characters) for _ in range(self.length))
+
+def main():
+    try:
+        length = int(input("Enter the desired length for the password: "))
+        generator = PasswordGenerator(length)
+        password = generator.generate()
+        print("Generated Password:", password)
+    except ValueError as e:
+        print("Error:", e)
+
+if __name__ == "__main__":
+    main()
